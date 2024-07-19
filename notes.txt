@@ -1,0 +1,80 @@
+Bun is an all-in-one toolkit for JavaScript and TypeScript apps.
+It ships as a single executable called bun.
+At its core is the Bun runtime, a fast JavaScript runtime designed as a drop-in replacement for Node.js.
+It's written in Zig and powered by JavaScriptCore under the hood,
+dramatically reducing startup times and memory usage.
+Under the hood Bun uses the JavaScriptCore engine,
+which is developed by Apple for Safari.
+In most cases, the startup and running performance is faster than V8,
+the engine used by Node.js and Chromium-based browsers.
+Its transpiler and runtime are written in Zig, a modern,
+high-performance language. On Linux, this translates into startup times 4x faster than Node.js.
+
+curl -fsSL https://bun.sh/install | bash    -> To install bun for macOS, Linux, and WSL
+bun --version                               -> To check the bun version
+bun --revision                              -> To see the precise commit of oven-sh/bun that you're using
+bun upgrade                                 -> To upgrade bun
+bun init                                    -> To scaffold a new project
+rm -rf ~/.bun                               -> To uninstall bun for macOS, Linux, and WSL
+bun create                                  -> https://bun.sh/docs/cli/bun-create
+
+
+BUN IS A JAVASCRIPT RUNTIME used to execute JavaScript/TypeScript files, package.json scripts,
+and executable packages (bin)               -> https://docs.npmjs.com/cli/v9/configuring-npm/package-json#bin  
+
+bun [bun flags] run <script> [script flags] -> To run a package.json script                              
+[bun flags]
+bun --smol  start                           -> favorize memory usage over performance
+bun --watch start                           -> 
+bun --bun vite|next                         -> running a CLI with bun instead of nodejs
+bun run                                     -> To see the list of all available scripts in package.json 
+
+
+BUN IS A PACKAGE MANAGER
+bun install
+
+
+BUN IS A TEST RUNNER
+bun test
+
+BUN IS A BUNDLER
+bun build ./index.tsx           # bundle a project for browsers
+
+
+WHAT IS BUNX
+bunx cowsay 'Hello, world!'   # execute a package
+
+
+dev dependencies vs peer dependencies vs dependencies
+
+
+
+////////////////////////////  FIII LAAA YAMOOONE ///////////////////////////////
+
+https://www.typescriptlang.org/docs/handbook/compiler-options.html
+https://bun.sh/docs/runtime/env
+https://bun.sh/docs/runtime/jsx
+https://bun.sh/docs/runtime/typescript
+https://bun.sh/docs/runtime/loaders
+https://bun.sh/docs/runtime/debugger
+
+///////////////////////
+streaming part of a file
+You can send part of a file using the slice(start, end) method on the Bun.file object.
+This automatically sets the Content-Range and Content-Length headers on the Response object.
+
+Bun.serve({
+  fetch(req) {
+    // parse `Range` header
+    const [start = 0, end = Infinity] = req.headers
+      .get("Range") // Range: bytes=0-100
+      .split("=") // ["Range: bytes", "0-100"]
+      .at(-1) // "0-100"
+      .split("-") // ["0", "100"]
+      .map(Number); // [0, 100]
+
+    // return a slice of the file
+    const bigFile = Bun.file("./big-video.mp4");
+    return new Response(bigFile.slice(start, end));
+  },
+});

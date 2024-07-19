@@ -1,0 +1,23 @@
+{
+  "name": "bun-quickstart",
+  "trustedDependencies": ["my-trusted-package"],
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "start": "bun run index.ts",
+    "start:memoryoverperformance": "bun --smol run index.ts",
+    "start:watch": "bun --watch run index.ts",
+    "install:verbose": "bun install --verbose",
+    "install:silent": "bun install --silent"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.0.8",
+    "@types/figlet": "^1.5.8"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "figlet": "^1.7.0"
+  }
+}
