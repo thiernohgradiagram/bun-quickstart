@@ -48,6 +48,12 @@ bunx cowsay 'Hello, world!'   # execute a package
 dev dependencies vs peer dependencies vs dependencies
 
 
+1 - Install bun: https://bun.sh/docs/installation
+
+bun upgrade         -> get the latest version of bun
+bunx tsc -v         -> use the locally installed typescript
+
+
 
 ////////////////////////////  FIII LAAA YAMOOONE ///////////////////////////////
 
